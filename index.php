@@ -14,10 +14,11 @@ AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 $app->post("/upload/{requestSessionId}", function(Request $request, Response $response, array $args) {
-
     $sessionId = $args['requestSessionId'];
+    $month = date('M');
+    $day = date('d');
 
-    $directory = $this->get('upload_directory') . '/' . $sessionId;
+    $directory = sprintf("%s/%s/%s/%s", $this->get('upload_directory'), $month, $day, $sessionId);
 
     createPathIfNotExists($directory);
 
